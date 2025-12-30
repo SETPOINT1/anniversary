@@ -1,0 +1,300 @@
+/* =========================================
+   1. VARIABLES & RESET (ตั้งค่าสีและฟอนต์)
+   ========================================= */
+:root {
+    /* Kuromi Theme Palette */
+    --bg-cream: #FDFBF7;       /* สีพื้นหลังครีมสบายตา */
+    --primary-purple: #E0BBE4; /* สีม่วงพาสเทล (Kuromi) */
+    --dark-purple: #957DAD;    /* สีม่วงเข้มสำหรับขอบ/เงา */
+    --soft-text: #5D5D5D;      /* สีตัวหนังสือเทาเข้ม (ไม่ดำสนิท) */
+    --accent-pink: #FFDFD3;    /* สีชมพูสำหรับปุ่ม/หัวใจ */
+    --white: #FFFFFF;
+    
+    /* Spacing */
+    --container-padding: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Mali', cursive; /* ฟอนต์ลายมือ */
+    background-color: var(--bg-cream);
+    color: var(--soft-text);
+    line-height: 1.6;
+    overflow-x: hidden; /* ป้องกันการเลื่อนซ้ายขวาเกินจอ */
+}
+
+/* Helper Class สำหรับซ่อนหน้าเว็บ (ใช้กับ JS) */
+.hidden {
+    display: none !important;
+    opacity: 0;
+}
+
+/* =========================================
+   2. LOGIN SCREEN (หน้าใส่รหัส)
+   ========================================= */
+.login-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-cream);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    text-align: center;
+    padding: 20px;
+}
+
+.login-content h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--dark-purple);
+}
+
+.highlight-name {
+    color: #D291BC; /* สีชมพูอมม่วงเน้นชื่อแฟน */
+    font-weight: 700;
+}
+
+.kuromi-sticker {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Input & Button Styles */
+.input-group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+input[type="password"] {
+    padding: 12px 20px;
+    border: 2px solid var(--primary-purple);
+    border-radius: 50px;
+    font-family: 'Mali', cursive;
+    font-size: 1rem;
+    outline: none;
+    text-align: center;
+    width: 250px;
+    background: var(--white);
+    transition: all 0.3s ease;
+}
+
+input[type="password"]:focus {
+    border-color: var(--dark-purple);
+    box-shadow: 0 0 10px rgba(224, 187, 228, 0.5);
+}
+
+button {
+    padding: 10px 25px;
+    background-color: var(--dark-purple);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Mali', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.error-text {
+    color: #FF6B6B;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* =========================================
+   3. MAIN CONTENT (ส่วนเนื้อหาหลัก)
+   ========================================= */
+main {
+    animation: fadeIn 1.5s ease-in-out; /* เอฟเฟกต์ค่อยๆ ปรากฏ */
+    padding-bottom: 50px;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: linear-gradient(180deg, var(--bg-cream) 0%, #F3E5F5 100%);
+}
+
+.kuromi-sticker.large {
+    max-width: 180px;
+}
+
+.main-title {
+    font-size: 2rem;
+    color: var(--dark-purple);
+    margin-top: 10px;
+}
+
+.sub-title {
+    font-size: 1.5rem;
+    color: #888;
+}
+
+.date-text {
+    background-color: var(--white);
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   4. GALLERY SECTION (อัลบั้มรูป)
+   ========================================= */
+.gallery-section {
+    padding: 40px 20px;
+    position: relative; /* เพื่อให้วาง sticker ตัวที่ 3 ได้ */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section-heading {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: var(--dark-purple);
+    border-bottom: 2px dashed var(--primary-purple);
+    display: inline-block;
+    padding-bottom: 5px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Grid Layout สำหรับรูป */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 25px;
+    justify-items: center;
+}
+
+/* Polaroid Design Idea */
+.polaroid {
+    background: var(--white);
+    padding: 10px 10px 30px 10px; /* ด้านล่างเยอะหน่อยเหมือนโพลารอยด์ */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+}
+
+.polaroid img {
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    display: block;
+}
+
+.caption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* ทำให้รูปเอียงไปมาดูธรรมชาติ (Random Rotation) */
+.polaroid:nth-child(odd) {
+    transform: rotate(3deg);
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(-2deg);
+    margin-top: 20px; /* ขยับลงนิดนึงให้ดูไม่แข็ง */
+}
+
+.polaroid:hover {
+    transform: scale(1.05) rotate(0deg); /* เมาส์ชี้แล้วรูปเด้งขึ้นมาตรงๆ */
+    z-index: 10;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Sticker ตกแต่ง Gallery */
+.sticker-decoration {
+    text-align: right;
+    margin-top: -20px;
+    padding-right: 10px;
+    position: relative;
+    z-index: 5;
+}
+
+.sticker-decoration img {
+    width: 100px;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+}
+
+/* =========================================
+   5. FOOTER (ส่วนบอกรัก)
+   ========================================= */
+.footer-interaction {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #FFF0F5; /* สีชมพูจางๆ */
+    border-radius: 30px 30px 0 0;
+    margin-top: 40px;
+}
+
+.message-box {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    color: var(--soft-text);
+}
+
+.love-button {
+    background-color: #FF6B81;
+    color: white;
+    font-size: 1.2rem;
+    padding: 15px 40px;
+    border-radius: 50px;
+    border: 4px solid #FFD1D8;
+    box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
+    animation: heartbeat 1.5s infinite; /* ปุ่มเต้นตุบๆ */
+}
+
+/* =========================================
+   6. ANIMATIONS
+   ========================================= */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Mobile Adjustments */
+@media (min-width: 768px) {
+    .photo-grid {
+        grid-template-columns: repeat(3, 1fr); /* จอใหญ่โชว์ 3 แถว */
+    }
+    .kuromi-sticker.large {
+        max-width: 250px;
+    }
+}
